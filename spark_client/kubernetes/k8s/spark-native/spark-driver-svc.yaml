@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app-name: spark-${PRIORITY_CLASS_NAME}${NAME_SUFFIX}
+  name: spark-${PRIORITY_CLASS_NAME}${NAME_SUFFIX}-driver-svc
+  namespace: spark-jobs
+spec:
+  clusterIP: None
+  ports:
+  - name: 5678-5678
+    port: 5678
+    protocol: TCP
+    targetPort: 5678
+  selector:
+    app-name: spark-${PRIORITY_CLASS_NAME}${NAME_SUFFIX}
+    spark-role: driver
+  type: ClusterIP
